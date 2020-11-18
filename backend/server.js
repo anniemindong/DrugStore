@@ -4,10 +4,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const router = express.Router();
-const PORT = 4000;
+const PORT = 4010;
 
 // let Medicine = require('./medi.model');
 let Medicine = require('./Medicine');
+let DrugStore = require('./DrugStore');
 
 
 app.use(cors());
@@ -44,7 +45,7 @@ router.route('/add').post( function(req,res){
             res.status(200).json({success: true, message: 'Added Success'});
         })
         .catch(err => {
-            res.status(400).send('adding new todo failed');
+            res.status(400).send('adding new medicine failed');
         });
 });
 
@@ -56,7 +57,7 @@ router.route('/update/:id').post(function(req, res){
             medi.description = req.body.description;
             medi.name = req.body.name;
             medi.prescription = req.body.prescription;
-            medi.instock = req.body.instock;
+            medi.outstock = req.body.outstock;
 
             medi.save().then(medi => {
                 res.json('Medicine updated');
@@ -66,6 +67,7 @@ router.route('/update/:id').post(function(req, res){
             });
     });
 });
+
 
 app.use('/medicine', router);
 

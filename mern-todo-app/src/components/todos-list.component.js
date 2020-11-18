@@ -4,9 +4,9 @@ import axios from 'axios';
 
 const Medicine = props => (
     <tr> 
-        <td className={props.medicine.instock ? 'completed' : ''}>{props.medicine.name}</td>
-        <td className={props.medicine.instock ? 'completed' : ''}>{props.medicine.description}</td>
-        <td className={props.medicine.instock ? 'completed' : ''}>{props.medicine.prescription}</td>
+        <td className={props.medicine.outstock ? 'completed' : ''}>{props.medicine.name}</td>
+        <td className={props.medicine.outstock ? 'completed' : ''}>{props.medicine.description}</td>
+        <td className={props.medicine.outstock ? 'completed' : ''}>{props.medicine.prescription}</td>
         <td>
             <Link to={"/edit/"+props.medicine._id}>Edit</Link>
         </td>

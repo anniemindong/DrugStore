@@ -16,7 +16,7 @@ export default class CreateTodo extends Component {
             name:'',
             description:'',  
             prescription:'',
-            instock: false
+            outstock: false
         }
     }
 
@@ -44,13 +44,13 @@ export default class CreateTodo extends Component {
         console.log(`Todo Description: ${this.state.description}`);
         console.log(`Todo Responsible: ${this.state.name}`);
         console.log(`Todo Priority: ${this.state.prescription}`);
-        console.log(`Todo Completed: ${this.state.instock}`);
+        console.log(`Todo Completed: ${this.state.outstock}`);
 
         const newTodo = {
             name:this.state.name,
             description: this.state.description,
             prescription: this.state.prescription,
-            instock: this.state.instock
+            outstock: this.state.outstock
         }
         
         axios.post('http://localhost:4000/medicine/add', newTodo)
@@ -72,7 +72,7 @@ export default class CreateTodo extends Component {
             name:'',
             description:'',
             prescription:'',
-            instock: false
+            outstock: false
         })
     }
 

@@ -5,7 +5,7 @@ const Medicine = new mongoose.Schema({
     name: { type: String },
     description: { type: String },
     prescription: { type: String },
-    instock: { type: Boolean },
+    outstock: { type: Boolean },
 
 });
 module.exports = mongoose.model("Medicine", Medicine);

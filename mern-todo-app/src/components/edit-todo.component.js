@@ -1,4 +1,4 @@
-import React,{Component} from'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class EditTodo extends Component {
@@ -13,24 +13,24 @@ export default class EditTodo extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            description:'',
-            name:'',
-            prescription:'',
-            instock: false
+            description: '',
+            name: '',
+            prescription: '',
+            outstock: false
         }
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:4000/medicine/'+this.props.match.params.id)
+    componentDidMount() {
+        axios.get('http://localhost:4000/medicine/' + this.props.match.params.id)
             .then(response => {
                 this.setState({
                     description: response.data.description,
                     name: response.data.name,
                     prescription: response.data.prescription,
-                    instock: response.data.instock
+                    outstock: response.data.outstock
                 })
             })
-            .catch(function(error){
+            .catch(function (error) {
                 console.log(error)
             })
     }
@@ -53,7 +53,7 @@ export default class EditTodo extends Component {
     }
     onChangeTodoCompleted(e) {
         this.setState({
-            instock: !this.state.instock
+            outstock:!this.state.outstock
         });
     }
 
@@ -63,10 +63,12 @@ export default class EditTodo extends Component {
             description: this.state.description,
             name: this.state.name,
             prescription: this.state.prescription,
-            instock: this.state.instock
+            outstock: this.state.outstock
         };
-        axios.post('http://localhost:4000/medicine/update/'+this.props.match.params.id, obj)
-            .then(res => console.log(res.data));
+        axios.post('http://localhost:4000/medicine/update/' + this.props.match.params.id, obj)
+            .then(function (res) {
+                alert("Update Successful!");
+            });
 
         this.props.history.push('/');
     }
@@ -76,64 +78,64 @@ export default class EditTodo extends Component {
             <div>
                 <h3>Update medicine</h3>
                 <form onSubmit={this.onSubmit}>
-                <div className="form-group">
+                    <div className="form-group">
                         <label>Name: </label>
                         <input type="text"
-                                className="form-control"
-                                value={this.state.name}
-                                onChange={this.onChangeTodoResponsible}
-                                />
+                            className="form-control"
+                            value={this.state.name}
+                            onChange={this.onChangeTodoResponsible}
+                        />
                     </div>
 
                     <div className="form-group">
                         <label>Description: </label>
                         <input type="text"
-                                className="form-control"
-                                value={this.state.description}
-                                onChange={this.onChangeTodoDescription}
-                                />
+                            className="form-control"
+                            value={this.state.description}
+                            onChange={this.onChangeTodoDescription}
+                        />
                     </div>
-                    
+
                     <div className="form-group">
                         <div className="form-check form-check-inline">
                             <input className="form-check-input"
-                                    type="radio"
-                                    name="priorityOptions"
-                                    id="priorityLow"
-                                    value="Prescription Required"
-                                    checked={this.state.prescription==='Prescription Required'}
-                                    onChange={this.onChangeTodoPriority}
-                                    />
+                                type="radio"
+                                name="priorityOptions"
+                                id="priorityLow"
+                                value="Prescription Required"
+                                checked={this.state.prescription === 'Prescription Required'}
+                                onChange={this.onChangeTodoPriority}
+                            />
                             <label className="form-check-label">Prescription Required</label>
                         </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input"
-                                    type="radio"
-                                    name="priorityOptions"
-                                    id="priorityMedium"
-                                    value="Prescription Not Required"
-                                    checked={this.state.prescription==='Prescription Not Required'}
-                                    onChange={this.onChangeTodoPriority}
-                                    />
+                                type="radio"
+                                name="priorityOptions"
+                                id="priorityMedium"
+                                value="Prescription Not Required"
+                                checked={this.state.prescription === 'Prescription Not Required'}
+                                onChange={this.onChangeTodoPriority}
+                            />
                             <label className="form-check-label">Prescription Not Required</label>
                         </div>
-                        
+
                         <div className="form-check">
                             <input type="checkbox"
-                                    className="form-check-input"
-                                    id="completedCheckbox"
-                                    name="completedCheckbox"
-                                    onChange={this.onChangeTodoCompleted}
-                                    checked={this.state.instock}
-                                    value={this.state.instock}
-                                    />
+                                className="form-check-input"
+                                id="completedCheckbox"
+                                name="completedCheckbox"
+                                onChange={this.onChangeTodoCompleted}
+                                checked={this.state.outstock}
+                                value={this.state.outstock}
+                            />
                             <label className="form-check-label" htmlFor="completedCheckbox">
                                 Out Stock
                             </label>
                         </div>
-                        <br/>
+                        <br />
                         <div className="form-group">
-                            <input type="submit" value="Update Medicine" className="btn btn-primary"/>
+                            <input type="submit" value="Update Medicine" className="btn btn-primary" />
                         </div>
                     </div>
                 </form>
