@@ -5,13 +5,20 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const router = express.Router();
 const PORT = 4010;
+const stores = require("./routes/api/stores");
+const passport = require("passport");
+
 
 // let Medicine = require('./medi.model');
-let Medicine = require('./Medicine');
-let DrugStore = require('./DrugStore');
+let Medicine = require('./models/Medicine');
 
 
 app.use(cors());
+app.use(
+    bodyParser.urlencoded({
+      extended: false
+    })
+  );
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb+srv://king_auth:7KckJMsEXKqhV8u@cluster0.f7nsr.mongodb.net/mediReminder?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -67,7 +74,14 @@ router.route('/update/:id').post(function(req, res){
             });
     });
 });
+// Passport middleware
+app.use(passport.initialize());
 
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/api/stores", stores);
 
 app.use('/medicine', router);
 

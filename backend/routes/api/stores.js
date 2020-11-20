@@ -17,7 +17,7 @@ const Store = require("../../models/Store");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-
+console.log("------")
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
