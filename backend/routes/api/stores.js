@@ -17,7 +17,6 @@ const Store = require("../../models/Store");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-console.log("------")
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
@@ -83,6 +82,7 @@ router.post("/login", (req, res) => {
           id: store.id,
           name: store.name
         };
+        console.log(payload)
 
         // Sign token
         jwt.sign(
@@ -94,7 +94,9 @@ router.post("/login", (req, res) => {
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token
+              name: store.name,
+              token: "Bearer " + token,
+              
             });
           }
         );

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const router = express.Router();
-const PORT = 4010;
+const PORT = 4000;
 const stores = require("./routes/api/stores");
 const passport = require("passport");
 
@@ -29,7 +29,7 @@ connection.once('open', function() {
 })
 
 router.route('/').get(function(req,res) {
-    Medicine.find(function(err, medicine) {
+    Medicine.find(req.query.store, function(err, medicine) {
         if (err){
             console.log(err);
         }else {
@@ -37,6 +37,7 @@ router.route('/').get(function(req,res) {
         }
     });
 });
+
 
 router.route('/:id').get(function(req, res){
     let id = req.params.id;

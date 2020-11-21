@@ -40,18 +40,20 @@ export default class CreateTodo extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(`Form submitted:`);
-        console.log(`Todo Description: ${this.state.description}`);
-        console.log(`Todo Responsible: ${this.state.name}`);
-        console.log(`Todo Priority: ${this.state.prescription}`);
-        console.log(`Todo Completed: ${this.state.outstock}`);
-
+        // console.log(`Form submitted:`);
+        // console.log(`Todo Description: ${this.state.description}`);
+        // console.log(`Todo Responsible: ${this.state.name}`);
+        // console.log(`Todo Priority: ${this.state.prescription}`);
+        // console.log(`Todo Completed: ${this.state.outstock}`);
+        var storeName = localStorage.getItem("storeUserName");
         const newTodo = {
+            store:storeName,
             name:this.state.name,
             description: this.state.description,
             prescription: this.state.prescription,
             outstock: this.state.outstock
         }
+        console.log(newTodo)
         
         axios.post('http://localhost:4000/medicine/add', newTodo)
             .then(function (res) {

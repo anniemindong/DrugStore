@@ -21,7 +21,9 @@ export default class MedicinesList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/medicine/')
+        var store = localStorage.getItem("storeUserName");
+
+        axios.get('http://localhost:4000/medicine/', store)
             .then(response => {
                 this.setState({medicine: response.data});
             })
